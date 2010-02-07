@@ -5,7 +5,7 @@ use warnings;
 use TheEye;
 use Data::Dumper;
 
-my $mon = TheEye->new(debug=> 1, test_dir => 't');
+my $mon = TheEye->new(debug=> 1, test_dir => 'share/TheEye/t');
 $mon->load_plugin('Store::RRD');
 $mon->load_plugin('Graph::RRD');
 $mon->rrd_dir('rrds/');
