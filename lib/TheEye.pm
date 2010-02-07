@@ -38,19 +38,21 @@ has 'debug' => (
 
 =head1 SYNOPSIS
 
-Quick summary of what the module does.
-
-Perhaps a little code snippet.
+This is a short test snippet. look at the /bin directory for soem more
+ideas. howeveer, you can also simply use the scripts in bin and not play
+with the liraries at all.
 
     use TheEye;
+    use Data::Dumper;
 
-    my $mon = TheEye->new( test_dir => 't/');
-    ...
+    my $mon = TheEye->new(debug=> 1, test_dir => 't');
+    $mon->load_plugin('Store::RRD');
+    $mon->rrd_dir('rrds/');
+    my $results;
+    @{$results} = $mon->run();
+    $mon->save($results);
+    print Dumper($results);
 
-=head1 EXPORT
-
-A list of functions that can be exported.  You can delete this section
-if you don't export anything, such as for a purely object-oriented module.
 
 =head1 FUNCTIONS
 
