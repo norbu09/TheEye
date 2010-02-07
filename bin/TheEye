@@ -7,9 +7,13 @@ use Data::Dumper;
 
 my $mon = TheEye->new(debug=> 1, test_dir => 't');
 $mon->load_plugin('Store::RRD');
+$mon->load_plugin('Graph::RRD');
 $mon->rrd_dir('rrds/');
+$mon->img_dir('images/');
 my $results;
 @{$results} = $mon->run();
 $mon->save($results);
+$mon->graph($results);
+$mon->graph();
 
 #print Dumper($results);

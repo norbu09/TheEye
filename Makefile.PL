@@ -17,5 +17,7 @@ requires 'RRD::Simple';
 
 auto_install;
 
+install_share  'share/TheEye';
+
 WriteAll;
 

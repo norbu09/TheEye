@@ -16,11 +16,11 @@ TheEye - a TAP based monitoring system!
 
 =head1 VERSION
 
-Version 0.1
+Version 0.2
 
 =cut
 
-our $VERSION = '0.1';
+our $VERSION = '0.2';
 
 has 'test_dir' => (
     is      => 'rw',
@@ -117,7 +117,20 @@ anything. use eg. the RRD plugin or write your own.
 =cut
 
 sub save {
-    my ($self, $lines) = @_;
+    my ($self, $tests) = @_;
+    #print STDERR "saving ".($#lines +1)." results\n" if $self->debug;
+    return;
+}
+
+=head2 graph
+
+This is only a knob to override with plugins. the default does not draw
+anything. use eg. the RRD plugin or write your own.
+
+=cut
+
+sub graph {
+    my ($self, $tests) = @_;
     #print STDERR "saving ".($#lines +1)." results\n" if $self->debug;
     return;
 }

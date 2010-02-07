@@ -31,9 +31,7 @@ has 'rrd_tmp' => (
 around 'save' => sub {
     my $orig = shift;
     my ( $self, $tests ) = @_;
-print Dumper($tests);
     foreach my $result (@{$tests}) {
-        print Dumper($result);
         my @fparts = split( /\./, $result->{file} );
         $fparts[0] =~ s/\//-/g;
         print STDERR "saving ".$result->{file}."\n" if $self->debug;

@@ -17,6 +17,8 @@ name: TheEye
 no_index:
   directory:
     - inc
+    - share
+    - share/TheEye
     - t
 requires:
   File::ShareDir: 0
@@ -28,4 +30,4 @@ requires:
   Time::HiRes: 0
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.1
+version: 0.2
