@@ -8,6 +8,7 @@ license  'perl';
 build_requires 'Test::More';
 
 requires 'Moose';
+requires 'MooseX::Object::Pluggable';
 requires 'File::Util';
 requires 'File::ShareDir';
 requires 'TAP::Parser';

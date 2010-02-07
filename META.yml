@@ -24,6 +24,7 @@ requires:
   File::ShareDir: 0
   File::Util: 0
   Moose: 0
+  MooseX::Object::Pluggable: 0
   RRD::Simple: 0
   TAP::Parser: 0
   TAP::Parser::Aggregator: 0
