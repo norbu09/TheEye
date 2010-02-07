@@ -16,11 +16,11 @@ TheEye - a TAP based monitoring system!
 
 =head1 VERSION
 
-Version 0.2
+Version 0.3
 
 =cut
 
-our $VERSION = '0.2';
+our $VERSION = '0.3';
 
 has 'test_dir' => (
     is      => 'rw',
@@ -77,7 +77,7 @@ sub run {
     foreach my $file (@files) {
         print STDERR "processing ".$file."\n" if $self->debug;
         my $t0 = [gettimeofday];
-        my $parser = TAP::Parser->new( { source => $file } );
+        my $parser = TAP::Parser->new( { source => $file, merge => 1} );
         my $message;
         my @steps;
         my $t1 = [gettimeofday];
@@ -89,6 +89,7 @@ sub run {
                     message => $result->as_string,
                     delta => tv_interval($t1),
                     type => $result->type,
+                    status => ($result->is_ok ? 'ok' : 'not_ok'),
                 };
                 push(@steps, $hash);
             }
@@ -131,6 +132,29 @@ anything. use eg. the RRD plugin or write your own.
 
 sub graph {
     my ($self, $tests) = @_;
+    #print STDERR "saving ".($#lines +1)." results\n" if $self->debug;
+    return;
+}
+
+=head2 notify
+
+This is the most basic version - we notify to STDERR and hope that
+someone picks it up. this is really only a more advanced override knob.
+
+=cut
+
+sub notify {
+    my ($self, $tests) = @_;
+    foreach my $test (@{$tests}){
+        foreach my $step (@{$test->{steps}}){
+            if($step->{status} eq 'not_ok'){
+                my $message = 'we have a problem: '.$test->{file}."\n";
+                $message .= $step->{message} ."\n";
+                $message .= $step->{comment} if $step->{comment};
+                print STDERR $message;
+            }
+        }
+    }
     #print STDERR "saving ".($#lines +1)." results\n" if $self->debug;
     return;
 }

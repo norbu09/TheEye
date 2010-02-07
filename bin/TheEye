@@ -5,7 +5,7 @@ use warnings;
 use TheEye;
 use Data::Dumper;
 
-my $mon = TheEye->new(debug=> 1, test_dir => 'share/TheEye/t');
+my $mon = TheEye->new(debug=> 1, test_dir => 't');
 $mon->load_plugin('Store::RRD');
 $mon->load_plugin('Graph::RRD');
 $mon->rrd_dir('rrds/');
@@ -14,6 +14,6 @@ my $results;
 @{$results} = $mon->run();
 $mon->save($results);
 $mon->graph($results);
-$mon->graph();
+$mon->notify($results);
 
 #print Dumper($results);
