@@ -23,17 +23,18 @@ Version 0.3
 our $VERSION = '0.3';
 
 has 'test_dir' => (
-    is      => 'rw',
-    isa     => 'Str',
+    is       => 'rw',
+    isa      => 'Str',
     required => 1,
-    default => sub { dist_dir('TheEye').'/t' },
+    default  => sub { dist_dir('TheEye') . '/t' },
 );
 
 has 'debug' => (
-    is      => 'rw',
-    isa     => 'Bool',
+    is       => 'rw',
+    isa      => 'Bool',
     required => 1,
-    default => sub { 0 },
+    default  => sub { 0 },
+    predicate => 'is_debug',
 );
 
 =head1 SYNOPSIS
@@ -71,39 +72,41 @@ according test - not as a separate hash.
 sub run {
     my ($self) = @_;
     my $f = File::Util->new();
-    print STDERR "processing files in ".$self->test_dir."\n" if $self->debug;
-    my @files = $f->list_dir($self->test_dir, qw/ --files-only --recurse /);
+    print STDERR "processing files in " . $self->test_dir . "\n"
+      if $self->debug;
+    my @files = $f->list_dir( $self->test_dir, qw/ --files-only --recurse / );
     my @results;
     foreach my $file (@files) {
-        print STDERR "processing ".$file."\n" if $self->debug;
+        print STDERR "processing " . $file . "\n" if $self->debug;
         my $t0 = [gettimeofday];
-        my $parser = TAP::Parser->new( { source => $file, merge => 1} );
+        my $parser = TAP::Parser->new( { source => $file, merge => 1 } );
         my $message;
         my @steps;
         my $t1 = [gettimeofday];
         while ( my $result = $parser->next ) {
-            if($result->type eq 'comment'){
-                $steps[$#steps]->{comment} .= $result->as_string ."\n";
-            } else {
+            if ( $result->type eq 'comment' ) {
+                $steps[$#steps]->{comment} .= $result->as_string . "\n";
+            }
+            else {
                 my $hash = {
                     message => $result->as_string,
-                    delta => tv_interval($t1),
-                    type => $result->type,
-                    status => ($result->is_ok ? 'ok' : 'not_ok'),
+                    delta   => tv_interval($t1),
+                    type    => $result->type,
+                    status  => ( $result->is_ok ? 'ok' : 'not_ok' ),
                 };
-                push(@steps, $hash);
+                push( @steps, $hash );
             }
             $t1 = [gettimeofday];
         }
         my $aggregate = TAP::Parser::Aggregator->new;
         $aggregate->add( 'testcases', $parser );
         my $hash = {
-            delta   => tv_interval($t0),
-            passed  => scalar $aggregate->passed,
-            failed  => scalar $aggregate->failed,
-            file    => $file,
-            'time'  => time,
-            steps => \@steps,
+            delta  => tv_interval($t0),
+            passed => scalar $aggregate->passed,
+            failed => scalar $aggregate->failed,
+            file   => $file,
+            'time' => time,
+            steps  => \@steps,
         };
         push( @results, $hash );
     }
@@ -118,7 +121,8 @@ anything. use eg. the RRD plugin or write your own.
 =cut
 
 sub save {
-    my ($self, $tests) = @_;
+    my ( $self, $tests ) = @_;
+
     #print STDERR "saving ".($#lines +1)." results\n" if $self->debug;
     return;
 }
@@ -131,7 +135,8 @@ anything. use eg. the RRD plugin or write your own.
 =cut
 
 sub graph {
-    my ($self, $tests) = @_;
+    my ( $self, $tests ) = @_;
+
     #print STDERR "saving ".($#lines +1)." results\n" if $self->debug;
     return;
 }
@@ -144,17 +149,18 @@ someone picks it up. this is really only a more advanced override knob.
 =cut
 
 sub notify {
-    my ($self, $tests) = @_;
-    foreach my $test (@{$tests}){
-        foreach my $step (@{$test->{steps}}){
-            if($step->{status} eq 'not_ok'){
-                my $message = 'we have a problem: '.$test->{file}."\n";
-                $message .= $step->{message} ."\n";
+    my ( $self, $tests ) = @_;
+    foreach my $test ( @{$tests} ) {
+        foreach my $step ( @{ $test->{steps} } ) {
+            if ( $step->{status} eq 'not_ok' ) {
+                my $message = 'we have a problem: ' . $test->{file} . "\n";
+                $message .= $step->{message} . "\n";
                 $message .= $step->{comment} if $step->{comment};
                 print STDERR $message;
             }
         }
     }
+
     #print STDERR "saving ".($#lines +1)." results\n" if $self->debug;
     return;
 }
@@ -218,4 +224,4 @@ See http://dev.perl.org/licenses/ for more information.
 
 =cut
 
-1; # End of TheEye
+1;    # End of TheEye

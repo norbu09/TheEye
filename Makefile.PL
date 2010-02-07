@@ -15,6 +15,9 @@ requires 'TAP::Parser';
 requires 'TAP::Parser::Aggregator';
 requires 'Time::HiRes';
 requires 'RRD::Simple';
+requires 'LWP::UserAgent';
+requires 'URI::Escape';
+requires 'XML::Simple';
 
 auto_install;
 
