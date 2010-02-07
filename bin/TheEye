@@ -1,0 +1,15 @@
+#!/usr/bin/perl -Ilib
+
+use strict;
+use warnings;
+use TheEye;
+use Data::Dumper;
+
+my $mon = TheEye->new(debug=> 1, test_dir => 't');
+$mon->load_plugin('Store::RRD');
+$mon->rrd_dir('rrds/');
+my $results;
+@{$results} = $mon->run();
+$mon->save($results);
+
+#print Dumper($results);
