@@ -18,6 +18,7 @@ requires 'RRD::Simple';
 requires 'LWP::UserAgent';
 requires 'URI::Escape';
 requires 'XML::Simple';
+requires 'Mojolicious::Lite';
 
 auto_install;
 

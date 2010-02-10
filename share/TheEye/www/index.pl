@@ -4,7 +4,6 @@ use strict;
 use warnings;
 
 use Mojolicious::Lite; # 'app', 'post', 'get', 'shagadelic' is exported
-use Mojo::ByteStream 'b';
 use File::Util;
 
 my $img_dir = app->home->rel_dir('../../../images');
