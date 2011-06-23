@@ -56,6 +56,14 @@ has 'prowl_url' => (
     default  => 'https://prowl.weks.net/publicapi/'
 );
 
+has 'prowl_downtime' => (
+    is       => 'rw',
+    isa      => 'Str',
+    lazy     => 1,
+    required => 1,
+    default  => '/tmp/theeye.downtime'
+);
+
 has 'prowl_err' => (
     is        => 'rw',
     isa       => 'Bool',
@@ -65,8 +73,6 @@ has 'prowl_err' => (
 );
 
 around 'graph' => sub {
-    #print STDERR Dumper(@_);
-    #exit;
     my $orig = shift;
     my ( $self, $tests ) = @_;
 
@@ -107,7 +113,7 @@ sub prowl_add_key {
 
 sub prowl_send {
     my $self = shift;
-    print STDERR Dumper($self);
+    print STDERR Dumper($self) if $self->is_debug;
     my @req;
     if ( length $self->prowl_message > 10000 ) {
         $self->prowl_message( substr( $self->prowl_message, 0, 10000 ) );
@@ -121,8 +127,9 @@ sub prowl_send {
     push( @req, "priority=" . $self->prowl_prio );
     push( @req, "application=" . uri_escape( $self->prowl_app ) );
     my $path = 'add?' . join( '&', @req );
-    print STDERR "Request: $path\n";
-    my $result = $self->_call($path);
+    print STDERR "Request: $path\n" if $self->is_debug;
+    my $result = $self->_call($path)
+        unless -f $self->prowl_downtime;
     return $result;
 }
 
