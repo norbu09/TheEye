@@ -7,8 +7,7 @@ license  'perl';
 
 build_requires 'Test::More';
 
-requires 'Moose';
-requires 'MooseX::Object::Pluggable';
+requires 'Mouse';
 requires 'File::Util';
 requires 'File::ShareDir';
 requires 'TAP::Parser';
@@ -19,8 +18,7 @@ requires 'LWP::UserAgent';
 requires 'URI::Escape';
 requires 'XML::Simple';
 requires 'Mojolicious::Lite';
-
-auto_install;
+requires 'Collectd::Unixsock';
 
 install_share  'share/TheEye';
 
