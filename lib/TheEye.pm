@@ -92,7 +92,6 @@ sub run {
                     type    => $result->type,
                     status  => ( $result->is_ok ? 'ok' : 'not_ok' ),
                 };
-                $hash->{status} = 'not_ok' if $result->type eq 'bailout';
                 push( @steps, $hash );
             }
             $t1 = [gettimeofday];

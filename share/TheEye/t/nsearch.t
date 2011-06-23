@@ -2,7 +2,7 @@ use Test::More tests => 2;
 use IO::Socket;
 
 my $host      = '127.0.0.1';
-my $port      = 5984;
+my $port      = 1234;
 
 my $sock = IO::Socket::INET->new(
     Proto    => "tcp",
@@ -15,11 +15,7 @@ diag( 'Could not open socket: ' . $@ ) if $@;
 
 my $got;
 unless ($@) {
-    print $sock "GET /\r\n\r\n";
-    shutdown $sock, 1;
-    while (<$sock>) {
-        $got .= $_;
-    }
+    $got = <$sock>;
+    shutdown $sock, 2;
 }
-
-like( $got, qr/Server: CouchDB/, 'testing connection string' );
+like( $got, qr/searchd/, 'testing connection string' );
