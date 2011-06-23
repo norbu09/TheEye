@@ -10,21 +10,24 @@ has 'rrd_dir' => (
     is      => 'rw',
     isa     => 'Str',
     required => 1,
-    default => sub { '/tmp/rrds/' },
+    lazy     => 1,
+    default => '/tmp/rrds/'
 );
 
 has 'rrd_bin' => (
     is      => 'rw',
     isa     => 'Str',
     required => 1,
-    default => sub { qx/which rrdtool/ },
+    lazy     => 1,
+    default => qx/which rrdtool/
 );
 
 has 'rrd_tmp' => (
     is      => 'rw',
     isa     => 'Str',
     required => 1,
-    default => sub { '/tmp' },
+    lazy     => 1,
+    default => '/tmp'
 );
 
 

@@ -6,49 +6,67 @@ use Mouse::Role;
 use LWP::UserAgent;
 use URI::Escape;
 use XML::Simple;
+use Data::Dumper;
 
 has 'prowl_apikeys' => (
     is       => 'rw',
+    isa      => 'ArrayRef',
+    lazy     => 1,
     required => 1,
-    default  => sub { [] }
+    default  => sub { [] },
 );
 
 has 'prowl_app' => (
     is       => 'rw',
+    isa      => 'Str',
+    lazy     => 1,
     required => 1,
-    default  => sub { 'Net::Prowl' }
+    default  => 'TheEye'
 );
 
 has 'prowl_prio' => (
     is       => 'rw',
+    isa      => 'Int',
+    lazy     => 1,
     required => 1,
-    default  => sub { 0 }
+    default  => 0
 );
 
 has 'prowl_event' => (
     is       => 'rw',
+    isa      => 'Str',
+    lazy     => 1,
     required => 1,
-    default  => sub { 'alert' }
+    default  => 'alert'
 );
 
 has 'prowl_message' => (
     is       => 'rw',
+    isa      => 'Str',
+    lazy     => 1,
     required => 1,
-    default  => sub { '' }
+    default  => ''
 );
 
 has 'prowl_url' => (
     is       => 'ro',
+    isa      => 'Str',
+    lazy     => 1,
     required => 1,
-    default  => sub { 'https://prowl.weks.net/publicapi/' }
+    default  => 'https://prowl.weks.net/publicapi/'
 );
 
 has 'prowl_err' => (
     is        => 'rw',
-    predicate => 'has_err',
+    isa       => 'Bool',
+    required  => 0,
+    default   => 0,
+    predicate => 'has_prowl_err',
 );
 
 around 'graph' => sub {
+    #print STDERR Dumper(@_);
+    #exit;
     my $orig = shift;
     my ( $self, $tests ) = @_;
 
@@ -62,10 +80,10 @@ around 'graph' => sub {
                 push(@errors, $message);
             }
         }
-        if($errors[0]){
-            $self->prowl_message(join("\n\n--~==##\n\n", @errors));
-            $self->prowl_send();
-        }
+    }
+    if($errors[0]){
+        $self->prowl_message(join("\n\n--~==##\n\n", @errors));
+        $self->prowl_send();
     }
 };
 
@@ -89,6 +107,7 @@ sub prowl_add_key {
 
 sub prowl_send {
     my $self = shift;
+    print STDERR Dumper($self);
     my @req;
     if ( length $self->prowl_message > 10000 ) {
         $self->prowl_message( substr( $self->prowl_message, 0, 10000 ) );

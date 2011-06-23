@@ -7,6 +7,7 @@ use File::ShareDir 'dist_dir';
 use TAP::Parser qw/all/;
 use TAP::Parser::Aggregator qw/all/;
 use Time::HiRes qw(gettimeofday tv_interval);
+use Sys::Hostname;
 
 =head1 NAME
 
@@ -24,16 +25,24 @@ has 'test_dir' => (
     is       => 'rw',
     isa      => 'Str',
     required => 1,
-    default  => sub { dist_dir('TheEye') . '/t' },
+    #default  => dist_dir('TheEye') . '/t',
+    default  => './t',
 );
 
 has 'debug' => (
     is       => 'rw',
     isa      => 'Bool',
     required => 1,
-    default  => sub { 0 },
+    default  => 0,
     predicate => 'is_debug',
 );
+
+has 'hostname' => (
+    is => 'rw', 
+    isa => 'Str', 
+    default => hostname()
+);
+
 
 =head1 SYNOPSIS
 
