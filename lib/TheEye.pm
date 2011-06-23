@@ -1,14 +1,12 @@
 package TheEye;
 
-use Moose;
+use Mouse;
 use POSIX qw/strftime/;
 use File::Util;
 use File::ShareDir 'dist_dir';
 use TAP::Parser qw/all/;
 use TAP::Parser::Aggregator qw/all/;
 use Time::HiRes qw(gettimeofday tv_interval);
-
-with 'MooseX::Object::Pluggable';
 
 =head1 NAME
 
@@ -74,7 +72,7 @@ sub run {
     my $f = File::Util->new();
     print STDERR "processing files in " . $self->test_dir . "\n"
       if $self->debug;
-    my @files = $f->list_dir( $self->test_dir, qw/ --files-only --recurse / );
+    my @files = $f->list_dir( $self->test_dir, qw/ --files-only --recurse --pattern=\.t$/ );
     my @results;
     foreach my $file (@files) {
         print STDERR "processing " . $file . "\n" if $self->debug;
@@ -94,6 +92,7 @@ sub run {
                     type    => $result->type,
                     status  => ( $result->is_ok ? 'ok' : 'not_ok' ),
                 };
+                $hash->{status} = 'not_ok' if $result->type eq 'bailout';
                 push( @steps, $hash );
             }
             $t1 = [gettimeofday];
@@ -162,6 +161,15 @@ sub notify {
     }
 
     #print STDERR "saving ".($#lines +1)." results\n" if $self->debug;
+    return;
+}
+
+sub load_plugin {
+    my ($self, $plugin) = @_;
+
+    my $plug = 'TheEye::Plugin::'.$plugin;
+    print STDERR "Loading $plugin Plugin\n" if $self->is_debug;
+    with($plug);
     return;
 }
 

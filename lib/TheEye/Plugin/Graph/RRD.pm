@@ -2,7 +2,7 @@
 
 package TheEye::Plugin::Graph::RRD;
 
-use Moose::Role;
+use Mouse::Role;
 use RRD::Simple;
 
 has 'rrd_dir' => (

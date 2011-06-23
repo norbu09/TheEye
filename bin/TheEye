@@ -5,17 +5,20 @@ use warnings;
 use TheEye;
 use Data::Dumper;
 
-my $mon = TheEye->new(debug=> 1, test_dir => 't');
+my $testdir = shift || 'share/TheEye/t';
+
+my $mon = TheEye->new(debug=> 1, test_dir => $testdir);
+$mon->debug(1);
 $mon->load_plugin('Store::RRD');
 $mon->load_plugin('Graph::RRD');
-$mon->load_plugin('Notify::Prowl');
+#$mon->load_plugin('Notify::Prowl');
 $mon->rrd_dir('rrds/');
 $mon->img_dir('images/');
-$mon->prowl_apikeys(['YOURKEYHERE']);
+#$mon->prowl_apikeys(['b30c06b65fa7dba2394a1e5e6bae1546d6c1c123']);
 my $results;
 @{$results} = $mon->run();
 $mon->save($results);
 $mon->graph($results);
-$mon->notify($results);
+#$mon->notify($results);
 
-#print Dumper($results);
+print Dumper($results);

@@ -2,7 +2,7 @@
 
 package TheEye::Plugin::Notify::Prowl;
 
-use Moose::Role;
+use Mouse::Role;
 use LWP::UserAgent;
 use URI::Escape;
 use XML::Simple;

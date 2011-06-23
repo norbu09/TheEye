@@ -2,7 +2,7 @@
 
 package TheEye::Plugin::Store::RRD;
 
-use Moose::Role;
+use Mouse::Role;
 use RRD::Simple;
 use Data::Dumper;
 
