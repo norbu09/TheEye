@@ -15,7 +15,7 @@ $mon->load_plugin('Graph::RRD');
 $mon->load_plugin('Notify::Prowl');
 $mon->rrd_dir('rrds/');
 $mon->img_dir('images/');
-$mon->prowl_apikeys(['XXXXXXXXXXXXXXXXXXXXXX']);
+$mon->prowl_apikeys(['XXXXXXXXXXXXXXXXXXXXXXX']);
 $mon->prowl_app('TheEye('.$mon->hostname.')');
 my $results;
 @{$results} = $mon->run();
