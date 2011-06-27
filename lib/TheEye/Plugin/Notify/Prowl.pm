@@ -72,7 +72,7 @@ has 'prowl_err' => (
     predicate => 'has_prowl_err',
 );
 
-around 'graph' => sub {
+around 'notify' => sub {
     my $orig = shift;
     my ( $self, $tests ) = @_;
 
