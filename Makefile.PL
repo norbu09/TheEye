@@ -1,4 +1,5 @@
 use inc::Module::Install;
+use Module::Install::Share;
 
 name     'TheEye';
 all_from 'lib/TheEye.pm';
@@ -20,7 +21,7 @@ requires 'XML::Simple';
 requires 'Mojolicious::Lite';
 requires 'Collectd::Unixsock';
 
-install_share  'share/TheEye';
+#install_share  'share/TheEye';
 
 WriteAll;
 

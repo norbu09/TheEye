@@ -1,0 +1,8 @@
+.git/
+.gitignore
+.shipit
+.vimbk/
+.DS_Store
+MANIFEST.bak
+images/
+rrds/

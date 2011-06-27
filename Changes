@@ -1,5 +1,8 @@
 Revision history for TheEye
 
-0.1    2010-02-07T16:41:06
-       very basic parsing and RRD creation done
+0.5     2011-06-27T16:01:03
+        first real production release
+
+0.1     2010-02-07T16:41:06
+        very basic parsing and RRD creation done
 
