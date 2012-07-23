@@ -92,7 +92,12 @@ sub run {
         my $t1 = [gettimeofday];
         while ( my $result = $parser->next ) {
             if ( $result->type eq 'comment' ) {
-                $steps[$#steps]->{comment} .= $result->as_string . "\n";
+                if(exists $steps[$#steps]){
+                    $steps[$#steps]->{comment} .= $result->as_string . "\n";
+                } else {
+                    # debug output of the tests
+                    print STDERR $result->as_string."\n";
+                }
             }
             else {
                 my $hash = {
@@ -101,6 +106,7 @@ sub run {
                     type    => $result->type,
                     status  => ( $result->is_ok ? 'ok' : 'not_ok' ),
                 };
+                print STDERR Dumper($hash);
                 push( @steps, $hash );
             }
             $t1 = [gettimeofday];
@@ -190,9 +196,6 @@ Lenz Gschwendtner, C<< <norbu09 at cpan.org> >>
 Please report any bugs or feature requests to C<bug-theeye at rt.cpan.org>, or through
 the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=TheEye>.  I will be notified, and then you'll
 automatically be notified of progress on your bug as I make changes.
-
-
-
 
 =head1 SUPPORT
 

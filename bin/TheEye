@@ -10,7 +10,7 @@ my $testdir = shift || 'share/TheEye/t';
 my $mon = TheEye->new(debug=> 1, test_dir => $testdir);
 $mon->debug(1);
 $mon->load_plugin('Store::RRD');
-$mon->load_plugin('Store::Collectd');
+#$mon->load_plugin('Store::Collectd');
 $mon->load_plugin('Graph::RRD');
 $mon->load_plugin('Notify::Prowl');
 $mon->rrd_dir('rrds/');
