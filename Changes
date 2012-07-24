@@ -1,5 +1,9 @@
 Revision history for TheEye
 
+0.6     2012-07-24T20:43:03
+        made some changes to handle unplanned debug output from
+        phantomjs tests
+
 0.5     2011-06-27T16:01:03
         first real production release
 
