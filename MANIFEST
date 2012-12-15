@@ -10,8 +10,10 @@ t/boilerplate.t
 lib/TheEye.pm
 lib/TheEye/Plugin/Graph/RRD.pm
 lib/TheEye/Plugin/Notify/Prowl.pm
+lib/TheEye/Plugin/Notify/Oncall.pm
 lib/TheEye/Plugin/Store/Collectd.pm
 lib/TheEye/Plugin/Store/RRD.pm
+lib/TheEye/Helper/Graphite.pm
 bin/TheEye
 share/TheEye/t/couchdb.t
 share/TheEye/t/github_index.t

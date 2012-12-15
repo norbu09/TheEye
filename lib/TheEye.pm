@@ -15,11 +15,11 @@ TheEye - a TAP based monitoring system!
 
 =head1 VERSION
 
-Version 0.6.6.6.5.5.5.5.5.5.5.5.5.5.4
+Version 0.7.7.7.6.6.6.5.5.5.5.5.5.5.5.5.5.4
 
 =cut
 
-our $VERSION = '0.6';
+our $VERSION = '0.7';
 
 has 'test_dir' => (
     is       => 'rw',
