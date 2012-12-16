@@ -30,7 +30,7 @@ sub map_services {
             convert => 'byte_to_gb'
         },
         mem => {
-            path => '.memory.memory-free.value',
+            path    => '.memory.memory-free.value',
             convert => 'byte_to_mb',
         },
     };
@@ -51,26 +51,31 @@ sub get_numbers {
     my $svc = $self->map_services($service);
     my $res = $ua->get($self->url . $host . $svc->{path} . $self->postfix);
     if ($res->is_success) {
-        my ($def, $vals) = split(/\|/, $res->content);
-        my @values = split(/,/, $vals);
-        my ($node, $from, $to, $resolution) = split(/,/, $def);
-        my $val = pop(@values);
-        $val = pop(@values) if $val =~ m{none}i; # make syre we got something
-        if (exists $svc->{convert}) {
-            my $conv = $svc->{convert};
-            $val = $self->$conv($val);
+        my $result;
+        foreach (split(/\n/, $res->content)) {
+            my ($def, $vals) = split(/\|/, $_);
+            my @values = split(/,/, $vals);
+            my ($node, $from, $to, $resolution) = split(/,/, $def);
+            my $val = pop(@values);
+            $val = pop(@values)
+                if $val =~ m{none}i;    # make syre we got something
+            if (exists $svc->{convert}) {
+                my $conv = $svc->{convert};
+                $val = $self->$conv($val);
+            }
+            push(
+                @{$result}, {
+                    node       => $node,
+                    from       => $from,
+                    to         => $to,
+                    resolution => $resolution,
+                    value      => $val,
+                });
         }
-        return {
-            node       => $node,
-            from       => $from,
-            to         => $to,
-            resolution => $resolution,
-            value      => $val,
-        };
-    } else {
-        return {
-            error => $res->status_line,
-        };
+        return $result;
+    }
+    else {
+        return { error => $res->status_line, };
     }
 }
 
