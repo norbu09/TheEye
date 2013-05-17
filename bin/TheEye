@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/perl ## no critic
 
 use 5.010;
 use lib 'lib';
