@@ -1,5 +1,9 @@
 #!/usr/bin/perl -Ilib
 
+# ABSTRACT: Plugin for TheEye to raise alerts via Prowl
+#
+# VERSION
+
 package TheEye::Plugin::Notify::Prowl;
 
 use Mouse::Role;

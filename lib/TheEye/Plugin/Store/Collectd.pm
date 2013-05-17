@@ -1,5 +1,9 @@
 #!/usr/bin/perl -Ilib
 
+# ABSTRACT: Collectd plugin for TheEye
+#
+# VERSION
+
 package TheEye::Plugin::Store::Collectd;
 
 use Mouse::Role;

@@ -1,5 +1,9 @@
 #!/usr/bin/perl -Ilib
 
+# ABSTRACT: Riemann plugin for TheEye
+#
+# VERSION
+
 package TheEye::Plugin::Store::Riemann;
 
 use Mouse::Role;

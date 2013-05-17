@@ -1,0 +1,115 @@
+=pod
+
+=head1 NAME
+
+TheEye - TheEye is a TAP based monitoring system
+
+=head1 VERSION
+
+version 0.8
+
+=head1 SYNOPSIS
+
+This is a short test snippet. look at the /bin directory for soem more
+ideas. howeveer, you can also simply use the scripts in bin and not play
+with the liraries at all.
+
+    use TheEye;
+    use Data::Dumper;
+
+    my $mon = TheEye->new(debug=> 1, test_dir => 't');
+    $mon->load_plugin('Store::RRD');
+    $mon->rrd_dir('rrds/');
+    my $results;
+    @{$results} = $mon->run();
+    $mon->save($results);
+    print Dumper($results);
+
+=head1 FUNCTIONS
+
+=head2 run
+
+The run function runs the tests in the test directory (and all
+directories under it recusively) and returns an array of test results
+(each TAP line is one test result array field). These resuts contain
+some meta data as eg. the time it took to run the test.
+
+comments in TAP output are written into the reponse hash of the
+according test - not as a separate hash.
+
+=head2 save
+
+This is only a knob to override with plugins. the default does not save
+anything. use eg. the RRD plugin or write your own.
+
+=head2 graph
+
+This is only a knob to override with plugins. the default does not draw
+anything. use eg. the RRD plugin or write your own.
+
+=head2 notify
+
+This is the most basic version - we notify to STDERR and hope that
+someone picks it up. this is really only a more advanced override knob.
+
+=head1 AUTHOR
+
+Lenz Gschwendtner, C<< <norbu09 at cpan.org> >>
+
+=head1 BUGS
+
+Please report any bugs or feature requests to C<bug-theeye at rt.cpan.org>, or through
+the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=TheEye>.  I will be notified, and then you'll
+automatically be notified of progress on your bug as I make changes.
+
+=head1 SUPPORT
+
+You can find documentation for this module with the perldoc command.
+
+    perldoc TheEye
+
+You can also look for information at:
+
+=over 4
+
+=item * RT: CPAN's request tracker
+
+L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=TheEye>
+
+=item * AnnoCPAN: Annotated CPAN documentation
+
+L<http://annocpan.org/dist/TheEye>
+
+=item * CPAN Ratings
+
+L<http://cpanratings.perl.org/d/TheEye>
+
+=item * Search CPAN
+
+L<http://search.cpan.org/dist/TheEye/>
+
+=back
+
+=head1 ACKNOWLEDGEMENTS
+
+=head1 COPYRIGHT & LICENSE
+
+Copyright 2010 Lenz Gschwendtner.
+
+This program is free software; you can redistribute it and/or modify it
+under the terms of either: the GNU General Public License as published
+by the Free Software Foundation; or the Artistic License.
+
+See http://dev.perl.org/licenses/ for more information.
+
+=head1 AUTHOR
+
+Lenz Gschwendtner <lenz@springtimesoft.com>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by springtimesoft LTD.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+

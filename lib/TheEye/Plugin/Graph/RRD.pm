@@ -1,5 +1,9 @@
 #!/usr/bin/perl -Ilib
 
+# ABSTRACT: RRD plugin for TheEye
+#
+# VERSION
+
 package TheEye::Plugin::Graph::RRD;
 
 use Mouse::Role;

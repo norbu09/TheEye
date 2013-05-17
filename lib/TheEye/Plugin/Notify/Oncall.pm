@@ -1,5 +1,10 @@
 package TheEye::Plugin::Notify::Oncall;
 
+# ABSTRACT: Plugin for TheEye to raise alerts in OnCall
+#
+# VERSION
+
+
 use Mouse::Role;
 use JSON;
 use LWP::UserAgent;

@@ -1,5 +1,9 @@
 #!/usr/bin/perl -Ilib
 
+# ABSTRACT: Plugin for TheEye to raise alerts in Pager Duty
+#
+# VERSION
+
 package TheEye::Plugin::Notify::PagerDuty;
 
 use Mouse::Role;

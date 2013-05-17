@@ -1,5 +1,9 @@
 #!/usr/bin/perl -Ilib
 
+# ABSTRACT: the script that runs TheEye
+# PODNAME: bin/TheEye.pod
+# VERSION
+
 use strict;
 use warnings;
 use TheEye;

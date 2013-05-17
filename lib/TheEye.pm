@@ -1,5 +1,9 @@
 package TheEye;
 
+# ABSTRACT: TheEye is a TAP based monitoring system
+#
+# VERSION
+
 use Mouse;
 use POSIX qw/strftime/;
 use File::Util;
@@ -8,16 +12,6 @@ use TAP::Parser qw/all/;
 use TAP::Parser::Aggregator qw/all/;
 use Time::HiRes qw(gettimeofday tv_interval);
 use Sys::Hostname;
-
-=head1 NAME
-
-TheEye - a TAP based monitoring system!
-
-=head1 VERSION
-
-Version 0.7.7.7.6.6.6.5.5.5.5.5.5.5.5.5.5.4
-
-=cut
 
 our $VERSION = '0.7';
 
