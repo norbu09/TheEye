@@ -1,13 +1,12 @@
-#!/usr/bin/perl -Ilib
+package TheEye::Plugin::Graph::RRD;
+
+use 5.010;
+use Mouse::Role;
+use RRD::Simple;
 
 # ABSTRACT: RRD plugin for TheEye
 #
 # VERSION
-
-package TheEye::Plugin::Graph::RRD;
-
-use Mouse::Role;
-use RRD::Simple;
 
 has 'rrd_dir' => (
     is       => 'rw',

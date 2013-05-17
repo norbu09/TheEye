@@ -1,14 +1,13 @@
-#!/usr/bin/perl -Ilib
+package TheEye::Plugin::Store::RRD;
+
+use 5.010;
+use Mouse::Role;
+use RRD::Simple;
+use Data::Dumper;
 
 # ABSTRACT: RRD plugin for TheEye
 #
 # VERSION
-
-package TheEye::Plugin::Store::RRD;
-
-use Mouse::Role;
-use RRD::Simple;
-use Data::Dumper;
 
 has 'rrd_dir' => (
     is      => 'rw',

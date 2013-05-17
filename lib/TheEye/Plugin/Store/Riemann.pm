@@ -1,13 +1,11 @@
-#!/usr/bin/perl -Ilib
-
-# ABSTRACT: Riemann plugin for TheEye
-#
-# VERSION
-
 package TheEye::Plugin::Store::Riemann;
 
 use Mouse::Role;
 use Riemann::Client;
+
+# ABSTRACT: Riemann plugin for TheEye
+#
+# VERSION
 
 has 'riemann' => (
     is       => 'rw',

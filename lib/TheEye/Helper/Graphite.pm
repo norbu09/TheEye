@@ -1,12 +1,12 @@
 package TheEye::Helper::Graphite;
 
-# ABSTRACT: Graphite plugin for TheEye
-#
-# VERSION
-
 use 5.010;
 use Mouse;
 use LWP::UserAgent;
+
+# ABSTRACT: Graphite plugin for TheEye
+#
+# VERSION
 
 has 'url' => (
     is  => 'rw',

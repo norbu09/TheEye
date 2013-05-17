@@ -1,13 +1,12 @@
-#!/usr/bin/perl -Ilib
+package TheEye::Plugin::Store::Collectd;
+
+use 5.010;
+use Mouse::Role;
+use Collectd::Unixsock;
 
 # ABSTRACT: Collectd plugin for TheEye
 #
 # VERSION
-
-package TheEye::Plugin::Store::Collectd;
-
-use Mouse::Role;
-use Collectd::Unixsock;
 
 has 'collectd_socket' => (
     is       => 'rw',

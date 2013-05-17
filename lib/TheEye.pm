@@ -1,9 +1,6 @@
 package TheEye;
 
-# ABSTRACT: TheEye is a TAP based monitoring system
-#
-# VERSION
-
+use 5.010;
 use Mouse;
 use POSIX qw/strftime/;
 use File::Util;
@@ -13,7 +10,9 @@ use TAP::Parser::Aggregator qw/all/;
 use Time::HiRes qw(gettimeofday tv_interval);
 use Sys::Hostname;
 
-our $VERSION = '0.7';
+# ABSTRACT: TheEye is a TAP based monitoring system
+#
+# VERSION
 
 has 'test_dir' => (
     is       => 'rw',
@@ -86,8 +85,8 @@ sub run {
         my $t1 = [gettimeofday];
         while ( my $result = $parser->next ) {
             if ( $result->type eq 'comment' ) {
-                if(exists $steps[$#steps]){
-                    $steps[$#steps]->{comment} .= $result->as_string . "\n";
+                if(exists $steps[-1]){
+                    $steps[-1]->{comment} .= $result->as_string . "\n";
                 } else {
                     # debug output of the tests
                     print STDERR $result->as_string."\n";

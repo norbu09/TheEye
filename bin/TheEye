@@ -1,13 +1,13 @@
-#!/usr/bin/perl -Ilib
+#!/usr/bin/perl
+
+use 5.010;
+use lib 'lib';
+use TheEye;
+use Data::Dumper;
 
 # ABSTRACT: the script that runs TheEye
 # PODNAME: bin/TheEye.pod
 # VERSION
-
-use strict;
-use warnings;
-use TheEye;
-use Data::Dumper;
 
 my $testdir = shift || 'share/TheEye/t';
 

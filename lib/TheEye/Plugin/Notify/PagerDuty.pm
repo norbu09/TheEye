@@ -1,16 +1,15 @@
-#!/usr/bin/perl -Ilib
-
-# ABSTRACT: Plugin for TheEye to raise alerts in Pager Duty
-#
-# VERSION
-
 package TheEye::Plugin::Notify::PagerDuty;
 
+use 5.010;
 use Mouse::Role;
 use LWP::UserAgent;
 use URI::Escape;
 use JSON;
 use Data::Dumper;
+
+# ABSTRACT: Plugin for TheEye to raise alerts in Pager Duty
+#
+# VERSION
 
 has 'pd_token' => (
     is       => 'rw',

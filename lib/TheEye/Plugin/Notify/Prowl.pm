@@ -1,16 +1,15 @@
-#!/usr/bin/perl -Ilib
-
-# ABSTRACT: Plugin for TheEye to raise alerts via Prowl
-#
-# VERSION
-
 package TheEye::Plugin::Notify::Prowl;
 
+use 5.010;
 use Mouse::Role;
 use LWP::UserAgent;
 use URI::Escape;
 use XML::Simple;
 use Data::Dumper;
+
+# ABSTRACT: Plugin for TheEye to raise alerts via Prowl
+#
+# VERSION
 
 has 'prowl_apikeys' => (
     is       => 'rw',
@@ -132,7 +131,8 @@ sub prowl_send {
     push( @req, "application=" . uri_escape( $self->prowl_app ) );
     my $path = 'add?' . join( '&', @req );
     print STDERR "Request: $path\n" if $self->is_debug;
-    my $result = $self->_call($path)
+    my $result;
+    $result = $self->_call($path)
         unless -f $self->prowl_downtime;
     return $result;
 }
