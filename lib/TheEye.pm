@@ -171,6 +171,12 @@ sub notify {
     return;
 }
 
+=head2 load_plugin
+
+This loads a plugin from the TheEye::Plugin namespace
+
+=cut
+
 sub load_plugin {
     my ($self, $plugin) = @_;
 

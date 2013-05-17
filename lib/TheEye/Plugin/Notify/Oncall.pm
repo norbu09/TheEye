@@ -71,3 +71,7 @@ sub oncall_send {
 }
 
 1;
+
+__DATA__
+
+=for Pod::Coverage oncall_send
