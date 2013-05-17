@@ -68,6 +68,7 @@ around 'notify' => sub {
             }
         }
     }
+};
 
 sub pd_send {
     my ( $self, $content ) = @_;
@@ -97,3 +98,7 @@ sub pd_send {
 }
 
 1;
+
+__DATA__
+
+=for Pod::Coverage pd_send

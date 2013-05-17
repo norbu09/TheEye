@@ -166,3 +166,7 @@ sub _call {
 }
 
 1;
+
+__DATA__
+
+=for Pod::Coverage prowl_verify prowl_add_key prowl_send
