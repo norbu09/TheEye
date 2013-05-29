@@ -3,6 +3,7 @@ package TheEye::Helper::Graphite;
 use 5.010;
 use Mouse;
 use LWP::UserAgent;
+use Test::More;
 
 # ABSTRACT: Graphite plugin for TheEye
 #
@@ -105,6 +106,38 @@ sub byte_to_mb {
     my ($self, $bytes) = @_;
 
     return $bytes / 1024 / 1024;
+}
+
+=head2 test_graphite
+
+Test a grahite data source for stale data and min/max
+
+=cut
+
+sub test_graphite {
+    my($self, $data, $limits) = @_;
+
+    if (ref $data eq 'HASH') {
+        fail("Communication error: " . $data->{error});
+    }
+    else {
+        foreach my $res (@{$data}) {
+            if(exists $limits->{lower}){
+                cmp_ok($res->{value}, '>=', $limits->{lower},
+                    "$res->{node} has less than $limits->{lower} $limits->{what} - currently: $res->{value}");
+            }
+            if(exists $limits->{upper}){
+                cmp_ok($res->{value}, '<=', $limits->{upper},
+                    "$res->{node} has more than $limits->{upper} $limits->{what} - currently: $res->{value}");
+            }
+            if(exists $limits->{stale}){
+                cmp_ok($res->{to}, '>=', time - $limits->{stale},
+                    "$res->{node} has stale data (currently $res->{to} seconds old)"
+                );
+            }
+        }
+    }
+
 }
 
 __PACKAGE__->meta->make_immutable;

@@ -52,13 +52,20 @@ around 'notify' => sub {
         foreach my $step ( @{ $test->{steps} } ) {
             if ( $step->{status} eq 'not_ok' ) {
 
+                if($step->{message} =~ m{^(not ok \d+ -) ([^\s]+) (.*)$}){
+                    $step->{lead_in} = $1;
+                    $step->{node} = $2;
+                    $step->{test_error} = $3;
+                }
                 my $message = {
                     service_key => $self->pd_token,
-                    incident_key => $test->{file},
+                    incident_key => $step->{node} || $test->{node},
                     event_type => 'trigger',
                     description => $step->{message},
                     details => {
-                        test => $step->{comment},
+                        node => $step->{node},
+                        test => $test->{file},
+                        result => $step->{comment},
                         host => $self->pd_host,
                         delta => $step->{delta},
                     },

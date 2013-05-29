@@ -52,6 +52,10 @@ anything. use eg. the RRD plugin or write your own.
 This is the most basic version - we notify to STDERR and hope that
 someone picks it up. this is really only a more advanced override knob.
 
+=head2 load_plugin
+
+This loads a plugin from the TheEye::Plugin namespace
+
 =head1 AUTHOR
 
 Lenz Gschwendtner, C<< <norbu09 at cpan.org> >>
