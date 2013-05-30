@@ -48,19 +48,19 @@ around 'save' => sub {
 
         my $service = 'tests.' . $self->hostname . '.' . $file;
         eval {
-            $self->graphite->send(
+            $graphite->send(
                 path  => "$service.ok",
                 value => $result->{passed});
         };
         carp "sending metric failed: $@" if $@;
         eval {
-            $self->graphite->send(
+            $graphite->send(
                 path  => "$service.nok",
                 value => $result->{failed});
         };
         carp "sending metric failed: $@" if $@;
         eval {
-            $self->graphite->send(
+            $graphite->send(
                 path  => "$service.delta",
                 value => $result->{delta});
         };
