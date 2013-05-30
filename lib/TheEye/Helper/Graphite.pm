@@ -41,6 +41,10 @@ sub map_services {
         load => {
             path => '.load.load.shortterm',
         },
+        rabbit_msg => {
+            path => '.messages',
+            drill_down => 3,
+        },
     };
 
     return $hash->{$name};
@@ -59,8 +63,16 @@ sub get_numbers {
     my $svc = $self->map_services($service);
     my $res = $ua->get($self->url . $host . $svc->{path} . $self->postfix);
     if ($res->is_success) {
+        my $res_txt = $res->content;
+        if(exists $svc->{drill_down}){
+            foreach my $i (1 .. $svc->{drill_down}){
+                $host .= '.*';
+                my $res2 = $ua->get($self->url . $host . $svc->{path} . $self->postfix);
+                $res_txt .= $res2->content;
+            }
+        }
         my $result;
-        foreach (split(/\n/, $res->content)) {
+        foreach (split(/\n/, $res_txt)) {
             my ($def, $vals) = split(/\|/, $_);
             my @values = split(/,/, $vals);
             my ($node, $from, $to, $resolution) = split(/,/, $def);
