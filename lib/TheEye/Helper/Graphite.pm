@@ -38,6 +38,9 @@ sub map_services {
             path    => '.memory.memory-free.value',
             convert => 'byte_to_mb',
         },
+        load => {
+            path => '.load.load.shortterm',
+        },
     };
 
     return $hash->{$name};
@@ -63,7 +66,7 @@ sub get_numbers {
             my ($node, $from, $to, $resolution) = split(/,/, $def);
             my $val = pop(@values);
             $val = pop(@values)
-                if $val =~ m{none}i;    # make syre we got something
+                if $val =~ m{none}i;    # make sure we got something
             if (exists $svc->{convert}) {
                 my $conv = $svc->{convert};
                 $val = $self->$conv($val);
