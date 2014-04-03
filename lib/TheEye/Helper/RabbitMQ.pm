@@ -46,7 +46,7 @@ Get the numbers from the Graphite server
 =cut
 
 sub get_numbers {
-    my ($self, $service) = @_;
+    my ($self, @ignore) = @_;
 
     my $ua   = LWP::UserAgent->new();
 
@@ -61,10 +61,11 @@ sub get_numbers {
         eval { $json = $self->json->decode($res->content) };
         unless ($@) {
             foreach my $queue (@{$json}){
-                #$result->{$queue->{vhost} . '/' . $queue->{name}} = $queue;
+                my $name = $queue->{vhost} . '/' . $queue->{name};
+                next if map { $name =~ m/$_/ } @ignore;
                 push(
                     @{$result}, {
-                        node       => $queue->{vhost} . '/' . $queue->{name},
+                        node       => $name,
                         from       => time,
                         to         => time,
                         resolution => 1,
