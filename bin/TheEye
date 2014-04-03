@@ -1,4 +1,4 @@
-#!/usr/bin/perl ## no critic
+#!/usr/bin/env perl ## no critic
 
 use 5.010;
 use lib 'lib';
@@ -15,18 +15,18 @@ my $mon = TheEye->new(debug=> 1, test_dir => $testdir);
 $mon->debug(1);
 #$mon->load_plugin('Store::RRD');
 #$mon->load_plugin('Store::Collectd');
-$mon->load_plugin('Store::Riemann');
+#$mon->load_plugin('Store::Riemann');
 #$mon->load_plugin('Graph::RRD');
 $mon->load_plugin('Notify::Oncall');
-$mon->oncall_token('da860dcc8ab87f28a50282bbe800f5ec');
+$mon->oncall_token('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
 #$mon->rrd_dir('rrds/');
 #$mon->img_dir('images/');
 #$mon->prowl_apikeys(['XXXXXXXXXXXXXXXXXXXXXXX']);
 $mon->oncall_host($mon->hostname);
 my $results;
 @{$results} = $mon->run();
-$mon->save($results);
+#$mon->save($results);
 #$mon->graph($results);
 #$mon->notify($results);
 
-#print Dumper($results);
+print Dumper($results);

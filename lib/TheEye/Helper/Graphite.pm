@@ -20,6 +20,21 @@ has 'postfix' => (
     default => '&rawData=true&from=-15min',
 );
 
+has 'realm' => (
+    is  => 'rw',
+    isa => 'Str',
+);
+
+has 'user' => (
+    is  => 'rw',
+    isa => 'Str',
+);
+
+has 'pass' => (
+    is  => 'rw',
+    isa => 'Str',
+);
+
 =head2 map_services
 
 Map services to easier names
@@ -60,6 +75,9 @@ sub get_numbers {
     my ($self, $host, $service) = @_;
 
     my $ua  = LWP::UserAgent->new(ssl_opts => { verify_hostname => 0 });
+    if($self->user){
+        $ua->credentials("$host:443", $self->realm, $self->user, $self->pass);
+    }
     my $svc = $self->map_services($service);
     my $res = $ua->get($self->url . $host . $svc->{path} . $self->postfix);
     if ($res->is_success) {
