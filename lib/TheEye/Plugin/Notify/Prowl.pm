@@ -9,7 +9,7 @@ use Data::Dumper;
 
 # ABSTRACT: Plugin for TheEye to raise alerts via Prowl
 #
-our $VERSION = '0.3'; # VERSION
+our $VERSION = '0.4'; # VERSION
 
 has 'prowl_apikeys' => (
     is       => 'rw',
@@ -177,7 +177,7 @@ TheEye::Plugin::Notify::Prowl - Plugin for TheEye to raise alerts via Prowl
 
 =head1 VERSION
 
-version 0.3
+version 0.4
 
 =head1 AUTHOR
 

@@ -9,7 +9,7 @@ use JSON;
 
 # ABSTRACT: Graphite plugin for TheEye
 #
-our $VERSION = '0.3'; # VERSION
+our $VERSION = '0.4'; # VERSION
 
 has 'json' => (
     is      => 'rw',
@@ -133,7 +133,7 @@ TheEye::Helper::RabbitMQ - Graphite plugin for TheEye
 
 =head1 VERSION
 
-version 0.3
+version 0.4
 
 =head2 get_numbers
 

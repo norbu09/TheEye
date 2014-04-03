@@ -7,7 +7,7 @@ use Test::More;
 
 # ABSTRACT: Graphite plugin for TheEye
 #
-our $VERSION = '0.3'; # VERSION
+our $VERSION = '0.4'; # VERSION
 
 has 'url' => (
     is  => 'rw',
@@ -162,7 +162,7 @@ TheEye::Helper::Graphite - Graphite plugin for TheEye
 
 =head1 VERSION
 
-version 0.3
+version 0.4
 
 =head2 map_services
 
