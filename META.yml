@@ -16,8 +16,6 @@ meta-spec:
   version: 1.4
 name: TheEye
 requires:
-  Carp: 0
-  Collectd::Unixsock: 0
   Data::Dumper: 0
   File::ShareDir: 0
   File::Util: 0
@@ -27,10 +25,7 @@ requires:
   LWP::UserAgent: 0
   Mouse: 0
   Mouse::Role: 0
-  Net::Graphite: 0
   POSIX: 0
-  RRD::Simple: 0
-  Riemann::Client: 0
   Sys::Hostname: 0
   TAP::Parser: 0
   TAP::Parser::Aggregator: 0
@@ -44,4 +39,4 @@ resources:
   bugtracker: https://github.com/norbu09/TheEye/issues
   homepage: https://github.com/norbu09/TheEye/wiki
   repository: git://github.com/norbu09/TheEye.git
-version: 0.2
+version: 0.3

@@ -11,15 +11,10 @@ dist.ini
 lib/TheEye.pm
 lib/TheEye/Helper/Graphite.pm
 lib/TheEye/Helper/RabbitMQ.pm
-lib/TheEye/Plugin/Graph/RRD.pm
 lib/TheEye/Plugin/Notify/HipChat.pm
 lib/TheEye/Plugin/Notify/Oncall.pm
 lib/TheEye/Plugin/Notify/PagerDuty.pm
 lib/TheEye/Plugin/Notify/Prowl.pm
-lib/TheEye/Plugin/Store/Collectd.pm
-lib/TheEye/Plugin/Store/Graphite.pm
-lib/TheEye/Plugin/Store/RRD.pm
-lib/TheEye/Plugin/Store/Riemann.pm
 share/TheEye/t/couchdb.t
 share/TheEye/t/github_index.t
 share/TheEye/t/nsearch.t

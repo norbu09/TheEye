@@ -12,7 +12,7 @@ use Sys::Hostname;
 
 # ABSTRACT: TheEye is a TAP based monitoring system
 #
-our $VERSION = '0.2'; # VERSION
+our $VERSION = '0.3'; # VERSION
 
 has 'test_dir' => (
     is       => 'rw',
@@ -147,7 +147,7 @@ TheEye - TheEye is a TAP based monitoring system
 
 =head1 VERSION
 
-version 0.2
+version 0.3
 
 =head1 SYNOPSIS
 

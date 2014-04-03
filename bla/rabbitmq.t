@@ -15,7 +15,7 @@ my $g = TheEye::Helper::RabbitMQ->new(
     pass  => 'hase'
 );
 
-    my $result = $g->get_numbers('z\.', 'nsearch2');
-    $g->test_rabbit($result, { upper => $upper, what => 'messages' });
+my $result = $g->get_numbers('z\.', 'nsearch2');  # ignore management queues and nsearch2
+$g->test_rabbit($result, { upper => $upper, what => 'messages' });
 
 done_testing();
