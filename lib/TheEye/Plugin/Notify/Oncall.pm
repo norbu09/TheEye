@@ -9,7 +9,7 @@ use Data::Dumper;
 
 # ABSTRACT: Plugin for TheEye to raise alerts in OnCall
 #
-our $VERSION = '0.1'; # VERSION
+our $VERSION = '0.2'; # VERSION
 
 has 'oncall_token' => (
     is  => 'rw',
@@ -82,7 +82,7 @@ TheEye::Plugin::Notify::Oncall - Plugin for TheEye to raise alerts in OnCall
 
 =head1 VERSION
 
-version 0.1
+version 0.2
 
 =head1 AUTHOR
 

@@ -9,7 +9,7 @@ use Data::Dumper;
 
 # ABSTRACT: Plugin for TheEye to raise alerts in Pager Duty
 #
-our $VERSION = '0.1'; # VERSION
+our $VERSION = '0.2'; # VERSION
 
 has 'pd_token' => (
     is       => 'rw',
@@ -116,7 +116,7 @@ TheEye::Plugin::Notify::PagerDuty - Plugin for TheEye to raise alerts in Pager D
 
 =head1 VERSION
 
-version 0.1
+version 0.2
 
 =head1 AUTHOR
 

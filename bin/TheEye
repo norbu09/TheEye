@@ -7,7 +7,7 @@ use Data::Dumper;
 
 # ABSTRACT: the script that runs TheEye
 # PODNAME: bin/TheEye.pod
-our $VERSION = '0.1'; # VERSION
+our $VERSION = '0.2'; # VERSION
 
 my $testdir = shift || 'share/TheEye/t';
 
@@ -43,7 +43,7 @@ bin/TheEye.pod - the script that runs TheEye
 
 =head1 VERSION
 
-version 0.1
+version 0.2
 
 =head1 AUTHOR
 

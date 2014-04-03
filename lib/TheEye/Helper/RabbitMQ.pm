@@ -9,7 +9,7 @@ use JSON;
 
 # ABSTRACT: Graphite plugin for TheEye
 #
-our $VERSION = '0.1'; # VERSION
+our $VERSION = '0.2'; # VERSION
 
 has 'json' => (
     is      => 'rw',
@@ -41,7 +41,7 @@ has 'pass' => (
 
 
 sub get_numbers {
-    my ($self, $service) = @_;
+    my ($self, @ignore) = @_;
 
     my $ua   = LWP::UserAgent->new();
 
@@ -56,10 +56,11 @@ sub get_numbers {
         eval { $json = $self->json->decode($res->content) };
         unless ($@) {
             foreach my $queue (@{$json}){
-                #$result->{$queue->{vhost} . '/' . $queue->{name}} = $queue;
+                my $name = $queue->{vhost} . '/' . $queue->{name};
+                next if map { $name =~ m/$_/ } @ignore;
                 push(
                     @{$result}, {
-                        node       => $queue->{vhost} . '/' . $queue->{name},
+                        node       => $name,
                         from       => time,
                         to         => time,
                         resolution => 1,
@@ -132,7 +133,7 @@ TheEye::Helper::RabbitMQ - Graphite plugin for TheEye
 
 =head1 VERSION
 
-version 0.1
+version 0.2
 
 =head2 get_numbers
 

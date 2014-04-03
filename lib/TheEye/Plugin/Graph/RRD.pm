@@ -6,7 +6,7 @@ use RRD::Simple;
 
 # ABSTRACT: RRD plugin for TheEye
 #
-our $VERSION = '0.1'; # VERSION
+our $VERSION = '0.2'; # VERSION
 
 has 'rrd_dir' => (
     is       => 'rw',
@@ -98,7 +98,7 @@ TheEye::Plugin::Graph::RRD - RRD plugin for TheEye
 
 =head1 VERSION
 
-version 0.1
+version 0.2
 
 =head1 AUTHOR
 
