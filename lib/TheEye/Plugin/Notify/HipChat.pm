@@ -6,7 +6,7 @@ use LWP::UserAgent;
 
 # ABSTRACT: Plugin for TheEye to raise alerts in Pager Duty
 #
-our $VERSION = '0.4'; # VERSION
+our $VERSION = '0.5'; # VERSION
 
 has 'hc_token' => (
     is       => 'rw',
@@ -92,7 +92,7 @@ TheEye::Plugin::Notify::HipChat - Plugin for TheEye to raise alerts in Pager Dut
 
 =head1 VERSION
 
-version 0.4
+version 0.5
 
 =head1 AUTHOR
 

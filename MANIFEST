@@ -6,7 +6,6 @@ META.yml
 Makefile.PL
 README
 bin/TheEye
-bla/rabbitmq.t
 dist.ini
 lib/TheEye.pm
 lib/TheEye/Helper/Graphite.pm
