@@ -3,6 +3,7 @@ package TheEye::Helper::Graphite;
 use 5.010;
 use Mouse;
 use LWP::UserAgent;
+use HTTP::Request;
 use Test::More;
 
 # ABSTRACT: Graphite plugin for TheEye
@@ -18,11 +19,6 @@ has 'postfix' => (
     is      => 'rw',
     isa     => 'Str',
     default => '&rawData=true&from=-15min',
-);
-
-has 'realm' => (
-    is  => 'rw',
-    isa => 'Str',
 );
 
 has 'user' => (
@@ -75,11 +71,14 @@ sub get_numbers {
     my ($self, $host, $service) = @_;
 
     my $ua  = LWP::UserAgent->new(ssl_opts => { verify_hostname => 0 });
-    if($self->user){
-        $ua->credentials("$host:443", $self->realm, $self->user, $self->pass);
-    }
     my $svc = $self->map_services($service);
-    my $res = $ua->get($self->url . $host . $svc->{path} . $self->postfix);
+    my $url = $self->url . $host . $svc->{path} . $self->postfix;
+    my $req = HTTP::Request->new(GET => $url );
+    if($self->user){
+        $req->authorization_basic($self->user, $self->pass);
+    }
+
+    my $res = $ua->request($req);
     if ($res->is_success) {
         my $res_txt = $res->content;
         if(exists $svc->{drill_down}){
